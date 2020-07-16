@@ -1,3 +1,14 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cd491a5f-4195-4e2c-b57a-6069b68f299e/deploy-status)](https://app.netlify.com/sites/dazzling-saha-6569be/deploys)
+
+## How to run locally
+In your console run the following commands:
+```console
+git clone https://github.com/bissisoft/vps.git
+cd vps
+yarn install
+yarn start
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
