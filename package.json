@@ -1,13 +1,26 @@
 {
-  "name": "vps",
+  "name": "theviewpointsite",
   "version": "0.1.0",
-  "private": true,
+  "description": "A Blockstack Dapp using ReactJS",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bissisoft/vps.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bissisoft/vps/issues"
+  },
+  "author": {
+    "name": "BissiSoft",
+    "email": "info@bissisoft.com",
+    "url": "https://bissisoft.com"
+  },
+  "license": "MIT",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@blockstack/connect": "^2.8.3",
+    "blockstack": "^21.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
   },
   "scripts": {
