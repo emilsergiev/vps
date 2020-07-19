@@ -1,12 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense } from 'react'
+import { Route, Switch } from 'react-router-dom'
 import { CssBaseline, MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 import { blue, deepPurple } from '@material-ui/core/colors';
 import { UserSession, AppConfig } from 'blockstack'
 import { Connect } from '@blockstack/connect'
 import Cookies from 'universal-cookie'
 import TopBar from './components/TopBar'
-import Profile from './Profile.js'
-import Signin from './Signin.js'
+import Footer from './components/Footer'
+import Error404 from './pages/Error404'
+import Landing from './pages/Landing'
+import About from './pages/About'
 
 const current = new Date()
 const nextYear = new Date()
@@ -77,13 +80,21 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={this.state.theme()}>
         <CssBaseline />
-        <TopBar toggleTheme={this.toggleTheme} />
         <Connect authOptions={authOptions}>
-          {
-            !userData ? <Signin /> :
-            <Profile userData={userData} handleSignOut={ this.handleSignOut } />
-          }
+          <TopBar
+            userData={userData}
+            handleSignOut={this.handleSignOut}
+            toggleTheme={this.toggleTheme}
+          />
         </Connect>
+        <Suspense fallback={<p>loading...</p>}>
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/about" component={About} />
+            <Route component={Error404} />
+          </Switch>
+        </Suspense>
+        <Footer />
       </MuiThemeProvider>
     )
   }
