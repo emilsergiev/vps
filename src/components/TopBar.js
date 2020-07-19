@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import { HomeOutline, LightbulbOutline, Power } from 'mdi-material-ui'
+import { Menu, HomeOutline, LightbulbOutline, Power } from 'mdi-material-ui'
 import { AppBar, Toolbar, Tooltip, IconButton, Typography, Link } from '@material-ui/core'
 
 import { useConnect } from '@blockstack/connect'
@@ -9,7 +9,7 @@ import { useConnect } from '@blockstack/connect'
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    height: 70,
+    // height: 70,
   },
   title: {
     flexGrow: 1,
@@ -31,6 +31,16 @@ const TopBar = (props) => {
     <div className={classes.root}>
       <AppBar>
         <Toolbar>
+          <Tooltip title="Open sidebar" placement="bottom">
+            <IconButton
+              edge="start"
+              aria-label="Open drawer"
+              onClick={props.handleOpen}
+              className={classes.menuButton}
+            >
+              <Menu />
+            </IconButton>
+          </Tooltip>
           <Typography className={classes.title}>
             <Tooltip title="Go home" placement="bottom">
               <IconButton className={classes.home}>
