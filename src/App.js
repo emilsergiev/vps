@@ -1,19 +1,21 @@
 import React, { Component, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { CssBaseline, MuiThemeProvider, createMuiTheme } from '@material-ui/core'
+import {
+  Toolbar, CssBaseline, MuiThemeProvider, createMuiTheme
+} from '@material-ui/core'
 import { blue, deepPurple } from '@material-ui/core/colors';
 import { UserSession, AppConfig } from 'blockstack'
 import { Connect } from '@blockstack/connect'
 import Cookies from 'universal-cookie'
+import SideBar from './components/SideBar'
 import TopBar from './components/TopBar'
 import Footer from './components/Footer'
 import Error404 from './pages/Error404'
 import Landing from './pages/Landing'
 import About from './pages/About'
 
-const current = new Date()
 const nextYear = new Date()
-nextYear.setFullYear(current.getFullYear() + 1)
+nextYear.setFullYear(nextYear.getFullYear() + 1)
 
 const cookies = new Cookies()
 const appConfig = new AppConfig()
@@ -23,6 +25,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      opened: false,
       userData: null,
       darkTheme: cookies.get('themeColor') === 'dark',
       theme() {
@@ -35,9 +38,14 @@ class App extends Component {
       },
     }
 
+    this.handleOpen = this.handleOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
     this.toggleTheme = this.toggleTheme.bind(this)
     this.handleSignOut = this.handleSignOut.bind(this)
   }
+
+  handleOpen() { this.setState({ opened: true }) }
+  handleClose() { this.setState({ opened: false }) }
 
   handleSignOut(e) {
     e.preventDefault()
@@ -50,6 +58,7 @@ class App extends Component {
       cookies.set('themeColor', 'light', { path: '/', expires: nextYear })
       this.setState({
         theme() { return createMuiTheme({ palette: { primary: blue } }) },
+        opened: false,
         darkTheme: false
       })
     } else {
@@ -60,6 +69,7 @@ class App extends Component {
             palette: { type: 'dark', primary: deepPurple }
           })
         },
+        opened: false,
         darkTheme: true
       })
     }
@@ -79,14 +89,8 @@ class App extends Component {
     }
     return (
       <MuiThemeProvider theme={this.state.theme()}>
-        <CssBaseline />
-        <Connect authOptions={authOptions}>
-          <TopBar
-            userData={userData}
-            handleSignOut={this.handleSignOut}
-            toggleTheme={this.toggleTheme}
-          />
-        </Connect>
+        <CssBaseline /><Toolbar />
+
         <Suspense fallback={<p>loading...</p>}>
           <Switch>
             <Route exact path="/" component={Landing} />
@@ -94,6 +98,22 @@ class App extends Component {
             <Route component={Error404} />
           </Switch>
         </Suspense>
+
+        <Connect authOptions={authOptions}>
+          <TopBar
+            userData={userData}
+            handleOpen={this.handleOpen}
+            handleSignOut={this.handleSignOut}
+            toggleTheme={this.toggleTheme}
+          />
+          <SideBar
+            userData={userData}
+            open={this.state.opened}
+            handleClose={this.handleClose}
+            toggleTheme={this.toggleTheme}
+            handleSignOut={this.handleSignOut}
+          />
+        </Connect>
         <Footer />
       </MuiThemeProvider>
     )
