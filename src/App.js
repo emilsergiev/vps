@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import {
   Toolbar, CssBaseline, MuiThemeProvider, createMuiTheme
 } from '@material-ui/core'
@@ -13,6 +13,7 @@ import Footer from './components/Footer'
 import Error404 from './pages/Error404'
 import Landing from './pages/Landing'
 import About from './pages/About'
+import Board from './pages/Board'
 
 const nextYear = new Date()
 nextYear.setFullYear(nextYear.getFullYear() + 1)
@@ -95,6 +96,9 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/about" component={About} />
+            <Route exact path="/:name"
+              render={(props) => <Board user={this.state.userData} {...props} />}
+            />
             <Route component={Error404} />
           </Switch>
         </Suspense>
@@ -114,7 +118,10 @@ class App extends Component {
             handleSignOut={this.handleSignOut}
           />
         </Connect>
+
         <Footer />
+
+        <Redirect to={this.state.userData ? this.state.userData.username : ''} />
       </MuiThemeProvider>
     )
   }
@@ -123,7 +130,7 @@ class App extends Component {
     if (userSession.isSignInPending()) {
       userSession.handlePendingSignIn().then((userData) => {
         window.history.replaceState({}, document.title, "/")
-        this.setState({ userData: userData})
+        this.setState({ userData: userData })
       });
     } else if (userSession.isUserSignedIn()) {
       this.setState({ userData: userSession.loadUserData() })
