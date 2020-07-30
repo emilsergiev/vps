@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import {
   Toolbar, CssBaseline, MuiThemeProvider, createMuiTheme
 } from '@material-ui/core'
@@ -19,7 +19,7 @@ const nextYear = new Date()
 nextYear.setFullYear(nextYear.getFullYear() + 1)
 
 const cookies = new Cookies()
-const appConfig = new AppConfig()
+const appConfig = new AppConfig(['store_write', 'publish_data'])
 const userSession = new UserSession({ appConfig: appConfig })
 
 class App extends Component {
@@ -86,23 +86,22 @@ class App extends Component {
       userSession,
       finished: ({ userSession }) => {
         this.setState({ userData: userSession.loadUserData() })
+        window.location.replace("/"+this.state.userData.username)
       }
     }
     return (
       <MuiThemeProvider theme={this.state.theme()}>
         <CssBaseline /><Toolbar />
-
         <Suspense fallback={<p>loading...</p>}>
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/about" component={About} />
             <Route exact path="/:name"
-              render={(props) => <Board user={this.state.userData} {...props} />}
+              render={(props) => <Board userSession={userSession} {...props} />}
             />
             <Route component={Error404} />
           </Switch>
         </Suspense>
-
         <Connect authOptions={authOptions}>
           <TopBar
             userData={userData}
@@ -118,10 +117,7 @@ class App extends Component {
             handleSignOut={this.handleSignOut}
           />
         </Connect>
-
         <Footer />
-
-        <Redirect to={this.state.userData ? this.state.userData.username : ''} />
       </MuiThemeProvider>
     )
   }
