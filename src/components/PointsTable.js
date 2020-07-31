@@ -5,7 +5,7 @@ import {
   TablePagination, TableContainer, Paper, IconButton
 } from '@material-ui/core'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
-import EditIcon from '@material-ui/icons/Edit'
+import EditForm from 'components/EditForm'
 import Pagination from 'components/Pagination'
 import PointDialog from 'components/PointDialog'
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 
 const PointsTable = (props) => {
   const classes = useStyles()
-  const { points, isOwner, hub } = props
+  const { hub, points, isOwner, userSession, updatePoints } = props
 
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -48,9 +48,12 @@ const PointsTable = (props) => {
                 {
                   isOwner &&
                   <>
-                    <IconButton color="primary" size="small" aria-label="edit">
-                      <EditIcon fontSize="small" />
-                    </IconButton>
+                    <EditForm
+                      id={row.id}
+                      userSession={userSession}
+                      points={points}
+                      updatePoints={updatePoints}
+                    />
                     <IconButton color="secondary" size="small" aria-label="delete">
                       <DeleteForeverIcon fontSize="small" />
                     </IconButton>

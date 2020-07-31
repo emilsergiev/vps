@@ -112,6 +112,8 @@ const Board = (props) => {
               if (error.code === 'does_not_exist') {
                 userSession.putFile(POINTS_FILENAME, '', { encrypt: false })
                 setPoints([])
+              } else {
+                console.log(error.message)
               }
             })
         } else {
@@ -121,7 +123,7 @@ const Board = (props) => {
             .catch(err => { setPoints([])})
         }
       }
-    }).catch((error) => { setUserNotFound(true) })
+    }).catch(notFound => { setUserNotFound(true) })
     return () => isSubscribed = false
   }, [username, isOwner, userSession])
 
@@ -131,14 +133,18 @@ const Board = (props) => {
       fetch(_.get(apps, window.location.origin.toString())+`point-${lastPoint.id}.json`)
         .then(response => { return response.json()})
         .then(data => { setBestPoint(data) })
-        .catch(err => { console.log(err); })
+        .catch(e => { console.log(e.message) })
     } else {
       setBestPoint({})
     }
   }, [points, apps])
 
   if (userNotFound) {
-    return (<Error404 msg={`user "${username}" does not exist`} />)
+    return (
+      <Error404
+        msg={`user "${username}" does not exist or the blockchain api is down.`}
+      />
+    )
   }
 
   return (
@@ -187,7 +193,13 @@ const Board = (props) => {
               <Typography color="textSecondary">View Points</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <PointsTable points={points} isOwner={isOwner} hub={hub} />
+              <PointsTable
+                hub={hub}
+                points={points}
+                isOwner={isOwner}
+                userSession={userSession}
+                updatePoints={updatePoints}
+              />
             </AccordionDetails>
           </Accordion>
           <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
