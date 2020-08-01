@@ -11,21 +11,15 @@ const PointDialog = (props) => {
   const [point, setPoint] = useState({})
   const [open, setOpen] = useState(false)
 
-  const errorDescription = [...new Array(100)].map(
-    () => 'This view point file is missing...'
-  ).join('\n')
-
   const handleClickOpen = () => {
     setOpen(true)
     fetch(hub + `point-${id}.json`)
       .then(response => { return response.json() })
       .then(data => { setPoint(data) })
-      .catch(err => { setPoint({title: title, description: errorDescription}) })
+      .catch(err => { console.log(err.message) })
   }
 
-  const handleClose = () => {
-    setOpen(false)
-  }
+  const handleClose = () => { setOpen(false) }
 
   const descriptionElementRef = useRef(null)
   useEffect(() => {
