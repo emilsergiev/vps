@@ -8,6 +8,8 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import EditForm from 'components/EditForm'
 import Pagination from 'components/Pagination'
 import PointDialog from 'components/PointDialog'
+import { POINTS_FILENAME } from 'assets/constants'
+import _ from 'lodash'
 
 const useStyles = makeStyles({
   table: {
@@ -31,6 +33,21 @@ const PointsTable = (props) => {
     setRowsPerPage(parseInt(event.target.value, 10))
   }
 
+  const handleDelete = async (pointId) => {
+    const filteredPoints = _.filter(points, (point) => point.id !== pointId)
+
+    await userSession.putFile(
+      POINTS_FILENAME,
+      JSON.stringify(filteredPoints),
+      { encrypt: false }
+    )
+    .catch(error => { console.log(error.message) })
+
+    await userSession.deleteFile(`point-${pointId}.json`)
+      .then(() => { updatePoints(filteredPoints) })
+      .catch(err => { console.log(err.message) })
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="custom pagination table">
@@ -42,7 +59,7 @@ const PointsTable = (props) => {
             <TableRow key={row.id ? row.id : '1'}>
               <TableCell>
                 <PointDialog id={row.id} hub={hub} title={row.title} />
-                 &nbsp; {row.title}
+                &nbsp; {row.title}
               </TableCell>
               <TableCell align="right">
                 {
@@ -54,7 +71,12 @@ const PointsTable = (props) => {
                       points={points}
                       updatePoints={updatePoints}
                     />
-                    <IconButton color="secondary" size="small" aria-label="delete">
+                    <IconButton
+                      size="small"
+                      color="secondary"
+                      aria-label="delete"
+                      onClick={() => {handleDelete(row.id)}}
+                    >
                       <DeleteForeverIcon fontSize="small" />
                     </IconButton>
                   </>
