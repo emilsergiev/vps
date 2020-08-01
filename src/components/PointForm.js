@@ -46,21 +46,22 @@ const PointForm = (props) => {
     const detailParams = { ...params, description }
 
     // HACK: for some reason we cannot overwrite the original file directly :/
-    await userSession.deleteFile(POINTS_FILENAME)
+    // await userSession.deleteFile(POINTS_FILENAME)
     // we should be able to overwrite the original file without deleting it first!
     await userSession.putFile(
       POINTS_FILENAME,
       JSON.stringify([...points, params]),
       { encrypt: false }
     )
-    .then(() => { updatePoints([...points, params]) })
-    .catch(error => { console.log(error); updatePoints([]) })
+    .catch(error => { console.log(error.message) })
 
     await userSession.putFile(
       `point-${id}.json`,
       JSON.stringify(detailParams),
       { encrypt: false }
-    ).catch(err => { console.log(err) })
+    )
+    .then(() => { updatePoints([...points, params]) })
+    .catch(err => { console.log(err.message) })
   }
 
   return (
