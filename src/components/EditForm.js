@@ -89,13 +89,13 @@ const EditForm = (props) => {
             <TextField required fullWidth
               margin="dense"
               id="standard-required"
-              label="What's your point? (short title)"
+              label="What's your point?"
               value={newTitle}
               onChange={handleNewTitle}
             />
             <TextField multiline required fullWidth
               id="outlined-multiline-flexible"
-              label="Elaborate on your view point... (long description)"
+              label="Elaborate on your view point..."
               rows={3}
               rowsMax={21}
               value={newDescription}
