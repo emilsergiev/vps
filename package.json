@@ -21,6 +21,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/styles": "^4.10.0",
     "blockstack": "^21.1.0",
+    "downshift": "^6.0.2",
     "lodash": "^4.17.19",
     "mdi-material-ui": "^6.16.0",
     "react": "^16.13.1",

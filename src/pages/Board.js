@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Person, lookupProfile } from 'blockstack'
 import { makeStyles } from '@material-ui/core/styles'
 import {
-  Avatar, Container, Grid, Typography, Chip,
-  Card, CardActionArea, CardContent, CardMedia,
-  Accordion, AccordionDetails, AccordionSummary,
+  Avatar, Container, Grid, Typography, Chip, Card, CardActionArea,
+  CardContent, CardMedia, Accordion, AccordionDetails, AccordionSummary
 } from '@material-ui/core'
 import { ChevronDown } from 'mdi-material-ui'
 import { POINTS_FILENAME } from 'assets/constants'
 import avatarFallbackImage from 'assets/anon.png'
 import loadingImage from 'assets/loading.gif'
-import PointForm from 'components/PointForm'
 import PointsTable from 'components/PointsTable'
+import PointForm from 'components/PointForm'
 import Error404 from 'pages/Error404'
 import _ from 'lodash'
 
@@ -21,49 +20,17 @@ const useStyles = makeStyles(theme => ({
     padding: 10,
     marginBottom: 20,
   },
-  img: {
-    maxWidth: 250,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
   card: {
     textAlign: 'center',
   },
   media: {
-    // height: 0,
     paddingTop: '56.25%', // 16:9,
-    // marginTop:'30'
   },
   chip: {
     margin: theme.spacing(0,1,1,0),
   },
-  heading: {
-    margin: 10,
-    textAlign: 'center',
-    color: theme.palette.text.primary,
-  },
   avatar: {
     margin: 10,
-  },
-  bigAvatar: {
-    margin: 10,
-    width: 90,
-    height: 90,
-  },
-  textField: {
-    margin: theme.spacing(1,0.5,1,0.5),
-  },
-  button: {
-    margin: theme.spacing(0.5),
-  },
-  leftIcon: {
-    marginRight: theme.spacing(1),
-  },
-  rightIcon: {
-    marginLeft: theme.spacing(1),
   },
 }))
 
@@ -288,7 +255,8 @@ const Board = (props) => {
               <Typography>
                 {
                   _.keys(apps).map((key) => (
-                  key.substring(0, 17) !== 'http://localhost:' &&
+                    key.substring(0, 17) !== 'http://127.0.0.1:' &&
+                    key.substring(0, 17) !== 'http://localhost:' &&
                     <Chip
                       key={key}
                       size="small"
