@@ -36,9 +36,8 @@ class App extends Component {
           })
         }
         return createMuiTheme({ palette: { primary: blue } })
-      },
+      }
     }
-
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.toggleTheme = this.toggleTheme.bind(this)
@@ -50,7 +49,7 @@ class App extends Component {
 
   handleSignOut(e) {
     e.preventDefault()
-    this.setState({ userData: null })
+    this.setState({ userData: null, opened: false })
     userSession.signUserOut(window.location.origin)
   }
 
@@ -112,7 +111,7 @@ class App extends Component {
           <SideBar
             userData={userData}
             open={this.state.opened}
-            handleClose={this.handleClose}
+            close={this.handleClose}
             toggleTheme={this.toggleTheme}
             handleSignOut={this.handleSignOut}
           />
