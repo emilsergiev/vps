@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useConfirm } from 'material-ui-confirm'
 import {
   Table, TableBody, TableRow, TableCell, TableFooter, TablePagination,
-  TableContainer, Paper, IconButton, CircularProgress
+  TableContainer, Paper, IconButton, CircularProgress as Spinner
 } from '@material-ui/core'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import { POINTS_FILENAME } from 'assets/constants'
@@ -33,7 +33,7 @@ const PointsTable = (props) => {
 
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, points.length - page * rowsPerPage)
 
@@ -54,7 +54,6 @@ const PointsTable = (props) => {
     }).then(() => {
       if (!loading) {
         setLoading(true)
-
         userSession.putFile(
           POINTS_FILENAME,
           JSON.stringify(filteredPoints),
@@ -67,7 +66,7 @@ const PointsTable = (props) => {
     }).then(() => {
       updatePoints(filteredPoints)
       setLoading(false)
-    }).catch((e) => { console.log(e) })
+    })
   }
 
   return (
@@ -77,7 +76,7 @@ const PointsTable = (props) => {
           {(rowsPerPage > 0
             ? points.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : points
-          ).map((row) => (
+          ).map(row => (
             <TableRow key={row.id}>
               <TableCell>
                 <PointDialog id={row.id} hub={hub} title={row.title} />
@@ -88,8 +87,8 @@ const PointsTable = (props) => {
                   <>
                     <EditForm
                       id={row.id}
-                      userSession={userSession}
                       points={points}
+                      userSession={userSession}
                       updatePoints={updatePoints}
                     />
                     <IconButton
@@ -99,7 +98,10 @@ const PointsTable = (props) => {
                       onClick={() => {handleDelete(row.id)}}
                     >
                       <DeleteForeverIcon fontSize="small" />
-                      {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                      {
+                        loading &&
+                        <Spinner size={24} className={classes.buttonProgress} />
+                      }
                     </IconButton>
                   </>
                 }

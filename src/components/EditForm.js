@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EditForm = (props) => {
   const classes = useStyles()
-  const { id, userSession, points, updatePoints } = props
+  const { id, points, userSession, updatePoints } = props
 
   const [open, setOpen] = useState(false)
   const [point, setPoint] = useState(null)
