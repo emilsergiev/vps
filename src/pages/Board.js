@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     margin: 10,
   },
+  title: {
+    fontWeight: 'bold',
+  },
 }))
 
 const Board = (props) => {
@@ -60,9 +63,7 @@ const Board = (props) => {
     setExpanded(isExpanded ? panel : false);
   }
 
-  const updatePoints = updated => {
-    setPoints(updated)
-  }
+  const updatePoints = updated => { setPoints(updated) }
 
   useEffect(() => {
     let isSubscribed = true
@@ -178,30 +179,18 @@ const Board = (props) => {
               <Typography color="textSecondary">Best View Point</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography color="textPrimary" component="pre">
-                <Typography color="textPrimary" component="p">
-                  Created on: &nbsp;
-                  <Typography color="error" component="span">
-                    {bestPoint.date}
-                  </Typography>
+              <Typography color="textPrimary" component="div">
+                <Typography color="textPrimary" component="h1" className={classes.title}>
+                  {bestPoint.title}
+                </Typography>
+                <Typography color="textSecondary" component="p">
+                  {bestPoint.date}
+                </Typography>
+                <Typography color="secondary" component="p">
+                  {bestPoint.editDate}
                 </Typography>
                 <Typography color="textPrimary" component="p">
-                  ID: &nbsp;
-                  <Typography color="error" component="span">
-                    {bestPoint.id}
-                  </Typography>
-                </Typography>
-                <Typography color="textPrimary" component="p">
-                  Title: &nbsp;
-                  <Typography color="error" component="span">
-                    {bestPoint.title}
-                  </Typography>
-                </Typography>
-                <Typography color="textPrimary" component="p">
-                  Description: &nbsp;
-                  <Typography color="error" component="span">
-                    {bestPoint.description}
-                  </Typography>
+                  {bestPoint.description}
                 </Typography>
               </Typography>
             </AccordionDetails>

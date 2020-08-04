@@ -1,22 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react'
 import {
-  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton
+  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
+  IconButton, Link, CircularProgress
 } from '@material-ui/core'
-import VisibilityIcon from '@material-ui/icons/Visibility'
-import ThumbDownIcon from '@material-ui/icons/ThumbDown'
-import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined'
+import ThumbDownOutlinedIcon from '@material-ui/icons/ThumbDownOutlined'
+import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined'
 
 const PointDialog = (props) => {
   const { id, hub, title } = props
   const [point, setPoint] = useState({})
   const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleClickOpen = () => {
+  const handleClickOpen = async () => {
     setOpen(true)
-    fetch(hub + `point-${id}.json`)
-      .then(response => { return response.json() })
-      .then(data => { setPoint(data) })
-      .catch(err => { console.log(err.message) })
+    if (!loading) {
+      setLoading(true)
+      await fetch(hub + `point-${id}.json`)
+        .then(response => { return response.json() })
+        .then(data => {
+          setPoint(data)
+          setLoading(false)
+        })
+        .catch(err => { console.log(err.message) })
+    }
   }
 
   const handleClose = () => { setOpen(false) }
@@ -39,8 +47,9 @@ const PointDialog = (props) => {
         aria-label="view"
         onClick={handleClickOpen}
       >
-        <VisibilityIcon fontSize="small" />
+        <VisibilityOutlinedIcon fontSize="small" />
       </IconButton>
+      <Link color='textPrimary' onClick={handleClickOpen} href='#'>{title}</Link>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -49,13 +58,17 @@ const PointDialog = (props) => {
       >
         <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
         <DialogContent dividers={true}>
-          <DialogContentText
-            id="scroll-dialog-description"
-            ref={descriptionElementRef}
-            tabIndex={-1}
-          >
-            {point.description}
-          </DialogContentText>
+          {
+            loading ?
+            <CircularProgress size={68} /> :
+            <DialogContentText
+              id="scroll-dialog-description"
+              ref={descriptionElementRef}
+              tabIndex={-1}
+            >
+              {point.description}
+            </DialogContentText>
+          }
         </DialogContent>
         <DialogActions>
           <IconButton
@@ -64,7 +77,7 @@ const PointDialog = (props) => {
             aria-label="like"
             onClick={handleClose}
           >
-            <ThumbUpIcon fontSize="small" />
+            <ThumbUpOutlinedIcon fontSize="small" />
           </IconButton>
           <IconButton
             size="small"
@@ -72,7 +85,7 @@ const PointDialog = (props) => {
             aria-label="dislike"
             onClick={handleClose}
           >
-            <ThumbDownIcon fontSize="small" />
+            <ThumbDownOutlinedIcon fontSize="small" />
           </IconButton>
         </DialogActions>
       </Dialog>

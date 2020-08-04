@@ -1,8 +1,10 @@
 import React from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import { Paper, Container, Grid, Typography, Link, IconButton } from '@material-ui/core'
+import {
+  Paper, Container, Grid, Typography, Link, IconButton
+} from '@material-ui/core'
 import { Github } from 'mdi-material-ui'
-// import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,7 +35,11 @@ const Footer = () => {
           <Grid item xs={6}>
             <Typography variant="body2" color="error" className={classes.right}>
               Made with love by<br />
-              <Link color="textPrimary" href="#">
+              <Link
+                color="textPrimary"
+                component={RouterLink}
+                to="bissisoft.id.blockstack"
+              >
                 BissiSoft
               </Link>
             </Typography>

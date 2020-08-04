@@ -14,6 +14,7 @@ import Error404 from './pages/Error404'
 import Landing from './pages/Landing'
 import About from './pages/About'
 import Board from './pages/Board'
+import { ConfirmProvider } from 'material-ui-confirm'
 
 const nextYear = new Date()
 nextYear.setFullYear(nextYear.getFullYear() + 1)
@@ -91,32 +92,34 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={this.state.theme()}>
         <CssBaseline /><Toolbar />
-        <Suspense fallback={<p>loading...</p>}>
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/:name"
-              render={(props) => <Board userSession={userSession} {...props} />}
+        <ConfirmProvider>
+          <Suspense fallback={<p>loading...</p>}>
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/:name"
+                render={(props) => <Board userSession={userSession} {...props} />}
+              />
+              <Route component={Error404} />
+            </Switch>
+          </Suspense>
+          <Connect authOptions={authOptions}>
+            <TopBar
+              userData={userData}
+              handleOpen={this.handleOpen}
+              handleSignOut={this.handleSignOut}
+              toggleTheme={this.toggleTheme}
             />
-            <Route component={Error404} />
-          </Switch>
-        </Suspense>
-        <Connect authOptions={authOptions}>
-          <TopBar
-            userData={userData}
-            handleOpen={this.handleOpen}
-            handleSignOut={this.handleSignOut}
-            toggleTheme={this.toggleTheme}
-          />
-          <SideBar
-            userData={userData}
-            open={this.state.opened}
-            close={this.handleClose}
-            toggleTheme={this.toggleTheme}
-            handleSignOut={this.handleSignOut}
-          />
-        </Connect>
-        <Footer />
+            <SideBar
+              userData={userData}
+              open={this.state.opened}
+              close={this.handleClose}
+              toggleTheme={this.toggleTheme}
+              handleSignOut={this.handleSignOut}
+            />
+          </Connect>
+          <Footer />
+        </ConfirmProvider>
       </MuiThemeProvider>
     )
   }

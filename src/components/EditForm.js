@@ -1,20 +1,34 @@
 import React, { useState, useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import {
-  Button, IconButton, TextField,
-  Dialog, DialogActions, DialogContent, DialogTitle,
+  Button, IconButton, TextField, CircularProgress,
+  Dialog, DialogActions, DialogContent, DialogTitle
 } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 import { ContentSave } from 'mdi-material-ui'
 import { POINTS_FILENAME } from 'assets/constants'
 import _ from 'lodash'
 
+const useStyles = makeStyles((theme) => ({
+  buttonProgress: {
+    color: 'green',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
+}))
+
 const EditForm = (props) => {
-  const { id, userSession, points, updatePoints } = props
+  const classes = useStyles()
+  const { id, points, userSession, updatePoints } = props
 
   const [open, setOpen] = useState(false)
   const [point, setPoint] = useState(null)
   const [newTitle, setNewTitle] = useState('')
   const [newDescription, setNewDescription] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleNewTitle = event => { setNewTitle(event.target.value) }
   const handleNewDescription = event => { setNewDescription(event.target.value) }
@@ -41,35 +55,38 @@ const EditForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const date = point.date
-    const editDate = new Date().toUTCString()
-    const title = newTitle
-    const description = newDescription
+    if (!loading) {
+      setLoading(true)
+      const date = point.date
+      const editDate = new Date().toUTCString()
+      const title = newTitle
+      const description = newDescription
+      // for viewpoints.json
+      const params = { id, date, editDate, title }
+      // for point-${id}.json
+      const detailParams = { ...params, description }
 
-    // for viewpoints.json
-    const params = { id, date, editDate, title }
-    // for point-${id}.json
-    const detailParams = { ...params, description }
-
-    const editedPointsForIndex = _.map(points, (p) => {
+      const editedPointsForIndex = _.map(points, (p) => {
         return p.id === id ? params : p
-    })
+      })
 
-    await userSession.putFile(
-      POINTS_FILENAME,
-      JSON.stringify(editedPointsForIndex),
-      { encrypt: false }
-    ).catch(err => { console.log(err.message) })
+      await userSession.putFile(
+        POINTS_FILENAME,
+        JSON.stringify(editedPointsForIndex),
+        { encrypt: false }
+      ).catch(err => { console.log(err.message) })
 
-    await userSession.putFile(
-      `point-${id}.json`,
-      JSON.stringify(detailParams),
-      { encrypt: false }
-    )
-    .then(() => {
-      updatePoints(editedPointsForIndex)
-      handleClose()
-    }).catch(e => { console.log(e.message) })
+      await userSession.putFile(
+        `point-${id}.json`,
+        JSON.stringify(detailParams),
+        { encrypt: false }
+      )
+      .then(() => {
+        updatePoints(editedPointsForIndex)
+        setLoading(false)
+        handleClose()
+      }).catch(e => { console.log(e.message) })
+    }
   }
 
   return (
@@ -109,6 +126,10 @@ const EditForm = (props) => {
               Cancel
             </Button>
             <Button type="submit" color="primary" variant="contained">
+              {
+                loading &&
+                <CircularProgress size={28} className={classes.buttonProgress} />
+              }
               <ContentSave /> Save
             </Button>
           </DialogActions>
