@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from 'react'
+import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import {
   Toolbar, CssBaseline, MuiThemeProvider, createMuiTheme
@@ -93,16 +93,14 @@ class App extends Component {
       <MuiThemeProvider theme={this.state.theme()}>
         <CssBaseline /><Toolbar />
         <ConfirmProvider>
-          <Suspense fallback={<p>loading...</p>}>
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/:name"
-                render={(props) => <Board userSession={userSession} {...props} />}
-              />
-              <Route component={Error404} />
-            </Switch>
-          </Suspense>
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/:name"
+              render={(props) => <Board userSession={userSession} {...props} />}
+            />
+            <Route component={Error404} />
+          </Switch>
           <Connect authOptions={authOptions}>
             <TopBar
               userData={userData}
