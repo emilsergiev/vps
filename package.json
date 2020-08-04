@@ -23,6 +23,7 @@
     "blockstack": "^21.1.0",
     "downshift": "^6.0.2",
     "lodash": "^4.17.19",
+    "material-ui-confirm": "^2.1.1",
     "mdi-material-ui": "^6.16.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

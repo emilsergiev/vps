@@ -1,4 +1,4 @@
-import React, { Component, Suspense } from 'react'
+import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import {
   Toolbar, CssBaseline, MuiThemeProvider, createMuiTheme
@@ -14,6 +14,7 @@ import Error404 from './pages/Error404'
 import Landing from './pages/Landing'
 import About from './pages/About'
 import Board from './pages/Board'
+import { ConfirmProvider } from 'material-ui-confirm'
 
 const nextYear = new Date()
 nextYear.setFullYear(nextYear.getFullYear() + 1)
@@ -91,7 +92,7 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={this.state.theme()}>
         <CssBaseline /><Toolbar />
-        <Suspense fallback={<p>loading...</p>}>
+        <ConfirmProvider>
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/about" component={About} />
@@ -100,23 +101,23 @@ class App extends Component {
             />
             <Route component={Error404} />
           </Switch>
-        </Suspense>
-        <Connect authOptions={authOptions}>
-          <TopBar
-            userData={userData}
-            handleOpen={this.handleOpen}
-            handleSignOut={this.handleSignOut}
-            toggleTheme={this.toggleTheme}
-          />
-          <SideBar
-            userData={userData}
-            open={this.state.opened}
-            close={this.handleClose}
-            toggleTheme={this.toggleTheme}
-            handleSignOut={this.handleSignOut}
-          />
-        </Connect>
-        <Footer />
+          <Connect authOptions={authOptions}>
+            <TopBar
+              userData={userData}
+              handleOpen={this.handleOpen}
+              handleSignOut={this.handleSignOut}
+              toggleTheme={this.toggleTheme}
+            />
+            <SideBar
+              userData={userData}
+              open={this.state.opened}
+              close={this.handleClose}
+              toggleTheme={this.toggleTheme}
+              handleSignOut={this.handleSignOut}
+            />
+          </Connect>
+          <Footer />
+        </ConfirmProvider>
       </MuiThemeProvider>
     )
   }
