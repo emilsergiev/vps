@@ -8,6 +8,7 @@ import {
   Button, Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, Link, Typography
 } from '@material-ui/core'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import { PROFILE_URL } from 'assets/constants'
 
 const SideBar = (props) => {
@@ -70,11 +71,19 @@ const SideBar = (props) => {
         </ListItem>
       </List>
       <List>
+        <ListItem button key="faq" onClick={close}
+          component={RouterLink} to="/faq"
+        >
+          <ListItemIcon><HelpOutlineIcon /></ListItemIcon>
+          <ListItemText primary="FAQ" />
+        </ListItem>
+      </List>
+      <List>
         <ListItem button key="test" onClick={close}
           component={RouterLink} to="/testname.id.blockstack"
         >
           <ListItemIcon><TargetAccount /></ListItemIcon>
-          <ListItemText primary="Testing..." />
+          <ListItemText primary="Test" />
         </ListItem>
       </List>
     </Drawer>
