@@ -4,18 +4,18 @@ import {
   Toolbar, CssBaseline, MuiThemeProvider, createMuiTheme
 } from '@material-ui/core'
 import { blue, deepPurple } from '@material-ui/core/colors'
+import { ConfirmProvider } from 'material-ui-confirm'
 import { UserSession, AppConfig } from 'blockstack'
 import { Connect } from '@blockstack/connect'
 import Cookies from 'universal-cookie'
-import SideBar from './components/SideBar'
-import TopBar from './components/TopBar'
-import Footer from './components/Footer'
-import Error404 from './pages/Error404'
-import Landing from './pages/Landing'
-import About from './pages/About'
-import Faq from './pages/Faq'
-import Board from './pages/Board'
-import { ConfirmProvider } from 'material-ui-confirm'
+import SideBar from 'components/SideBar'
+import TopBar from 'components/TopBar'
+import Footer from 'components/Footer'
+import Error404 from 'pages/Error404'
+import Landing from 'pages/Landing'
+import About from 'pages/About'
+import Faq from 'pages/Faq'
+import Board from 'pages/Board'
 
 const nextYear = new Date()
 nextYear.setFullYear(nextYear.getFullYear() + 1)
