@@ -1,3 +1,10 @@
+# The View Point Site
+##### Web 3.0 DApp
+A Blockstack Social Networking Dapp with ReactJS
+
+## Production build --> https://theview.site
+
+Dev version --> https://dazzling-saha-6569be.netlify.app
 [![Netlify Status](https://api.netlify.com/api/v1/badges/cd491a5f-4195-4e2c-b57a-6069b68f299e/deploy-status)](https://app.netlify.com/sites/dazzling-saha-6569be/deploys)
 
 ## How to run locally
@@ -77,3 +84,10 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### Deployment 2
+**If you are deploying this, you'll need to set cores headers to allow requests from all hosts.**
+
+- This code includes deployment settings for Netlify
+
+**If you're deploying this on another service, you'll need to set CORS headers appropriately for that service.**
