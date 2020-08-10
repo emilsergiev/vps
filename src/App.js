@@ -16,6 +16,7 @@ import Landing from 'pages/Landing'
 import About from 'pages/About'
 import Faq from 'pages/Faq'
 import Board from 'pages/Board'
+import ViewPoint from 'pages/ViewPoint'
 
 const nextYear = new Date()
 nextYear.setFullYear(nextYear.getFullYear() + 1)
@@ -101,6 +102,7 @@ class App extends Component {
             <Route exact path="/:name"
               render={(props) => <Board userSession={userSession} {...props} />}
             />
+            <Route exact path="/:name/point/:id" component={ViewPoint} />
             <Route component={Error404} />
           </Switch>
           <Connect authOptions={authOptions}>
