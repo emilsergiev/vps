@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import {
   Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
-  IconButton, Link, CircularProgress
+  IconButton, Link, CircularProgress, Typography
 } from '@material-ui/core'
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined'
 import ThumbDownOutlinedIcon from '@material-ui/icons/ThumbDownOutlined'
@@ -13,9 +13,11 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   title: {
     textAlign: 'center',
-    padding: theme.spacing(1),
   },
   action: {
+    float: 'right',
+  },
+  container: {
     flexGrow: 1,
   },
 }))
@@ -26,6 +28,9 @@ const PointDialog = (props) => {
   const [point, setPoint] = useState({})
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const likes = Math.floor((Math.random() * 1000) + 10)
+  const dislikes = Math.floor((Math.random() * 50) + 1)
 
   const createMarkup = htmlText => { return {__html: htmlText} }
 
@@ -78,33 +83,34 @@ const PointDialog = (props) => {
           {
             loading ?
             <CircularProgress size={68} /> :
-            <pre>
-              <DialogContentText
-                id="scroll-dialog-description"
-                ref={descriptionElementRef}
-                dangerouslySetInnerHTML={createMarkup(point.description)}
-                tabIndex={-1}
-              />
-            </pre>
+            <DialogContentText
+              id="scroll-dialog-description"
+              ref={descriptionElementRef}
+              dangerouslySetInnerHTML={createMarkup(point.description)}
+              tabIndex={-1}
+            />
           }
         </DialogContent>
         <DialogActions>
-          <IconButton size="small" color="inherit" onClick={handleClose}>
-            <ThumbDownOutlinedIcon fontSize="small" />
-          </IconButton>
-          <IconButton
-            size="small"
-            color="inherit"
-            onClick={handleClose}
-            component={RouterLink}
-            className={classes.action}
-            to={`/${username}/point/${id}`}
-          >
-            <OpenInBrowserIcon fontSize="small" />
-          </IconButton>
-          <IconButton size="small" color="inherit" onClick={handleClose}>
+          <IconButton color="inherit" onClick={handleClose}>
             <ThumbUpOutlinedIcon fontSize="small" />
           </IconButton>
+          <Typography variant="caption">{likes}</Typography>
+          <IconButton color="inherit" onClick={handleClose}>
+            <ThumbDownOutlinedIcon fontSize="small" />
+          </IconButton>
+          <Typography variant="caption">{dislikes}</Typography>
+          <div className={classes.container}>
+            <IconButton
+              color="inherit"
+              onClick={handleClose}
+              component={RouterLink}
+              to={`/${username}/point/${id}`}
+              className={classes.action}
+            >
+              <OpenInBrowserIcon fontSize="small" />
+            </IconButton>
+          </div>
         </DialogActions>
       </Dialog>
     </>

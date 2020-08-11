@@ -10,7 +10,7 @@ import _ from 'lodash'
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    padding: 10,
+    padding: theme.spacing(1),
   },
   title: {
     textAlign: 'center',
@@ -33,7 +33,7 @@ const ViewPoint = (props) => {
   const [userNotFound, setUserNotFound] = useState(false)
   const [pointNotFound, setPointNotFound] = useState(false)
 
-  const createMarkup = htmlText => { return {__html: htmlText} }
+  const markup = html => { return {__html: html} }
 
   useEffect(() => {
     lookupProfile(name).then((profile) => {
@@ -71,11 +71,7 @@ const ViewPoint = (props) => {
           {
             loading ?
             <LinearProgress className={classes.progress} /> :
-            <pre>
-              <Typography
-                dangerouslySetInnerHTML={createMarkup(point.description)}
-              />
-            </pre>
+            <Typography dangerouslySetInnerHTML={markup(point.description)} />
           }
           </Paper>
         </Grid>
