@@ -46,7 +46,7 @@ const Footer = () => {
               <Link
                 color="textPrimary"
                 component={RouterLink}
-                to="bissisoft.id.blockstack"
+                to="/bissisoft.id.blockstack"
               >
                 BissiSoft
               </Link>

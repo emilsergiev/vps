@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function Landing() {
+const Landing = () => {
   const classes = useStyles()
 
   return (
@@ -166,3 +166,5 @@ export default function Landing() {
     </Container>
   )
 }
+
+export default Landing
