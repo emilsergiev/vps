@@ -6,12 +6,28 @@ import {
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined'
 import ThumbDownOutlinedIcon from '@material-ui/icons/ThumbDownOutlined'
 import ThumbUpOutlinedIcon from '@material-ui/icons/ThumbUpOutlined'
+import OpenInBrowserIcon from '@material-ui/icons/OpenInBrowser'
+import { Link as RouterLink } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  title: {
+    textAlign: 'center',
+    padding: theme.spacing(1),
+  },
+  action: {
+    flexGrow: 1,
+  },
+}))
 
 const PointDialog = (props) => {
-  const { id, hub, title } = props
+  const classes = useStyles()
+  const { id, hub, title, username } = props
   const [point, setPoint] = useState({})
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const createMarkup = htmlText => { return {__html: htmlText} }
 
   const handleClickOpen = async () => {
     setOpen(true)
@@ -44,7 +60,6 @@ const PointDialog = (props) => {
       <IconButton
         size="small"
         color="inherit"
-        aria-label="view"
         onClick={handleClickOpen}
       >
         <VisibilityOutlinedIcon fontSize="small" />
@@ -56,36 +71,39 @@ const PointDialog = (props) => {
         aria-labelledby="scroll-dialog-title"
         aria-describedby="scroll-dialog-description"
       >
-        <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
+        <DialogTitle id="scroll-dialog-title" className={classes.title}>
+          {title}
+        </DialogTitle>
         <DialogContent dividers={true}>
           {
             loading ?
             <CircularProgress size={68} /> :
-            <DialogContentText
-              id="scroll-dialog-description"
-              ref={descriptionElementRef}
-              tabIndex={-1}
-            >
-              {point.description}
-            </DialogContentText>
+            <pre>
+              <DialogContentText
+                id="scroll-dialog-description"
+                ref={descriptionElementRef}
+                dangerouslySetInnerHTML={createMarkup(point.description)}
+                tabIndex={-1}
+              />
+            </pre>
           }
         </DialogContent>
         <DialogActions>
-          <IconButton
-            size="small"
-            color="inherit"
-            aria-label="like"
-            onClick={handleClose}
-          >
-            <ThumbUpOutlinedIcon fontSize="small" />
+          <IconButton size="small" color="inherit" onClick={handleClose}>
+            <ThumbDownOutlinedIcon fontSize="small" />
           </IconButton>
           <IconButton
             size="small"
             color="inherit"
-            aria-label="dislike"
             onClick={handleClose}
+            component={RouterLink}
+            className={classes.action}
+            to={`/${username}/point/${id}`}
           >
-            <ThumbDownOutlinedIcon fontSize="small" />
+            <OpenInBrowserIcon fontSize="small" />
+          </IconButton>
+          <IconButton size="small" color="inherit" onClick={handleClose}>
+            <ThumbUpOutlinedIcon fontSize="small" />
           </IconButton>
         </DialogActions>
       </Dialog>

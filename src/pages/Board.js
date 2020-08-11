@@ -11,6 +11,7 @@ import avatarFallbackImage from 'assets/anon.png'
 import loadingImage from 'assets/loading.gif'
 import PointsTable from 'components/PointsTable'
 import PointForm from 'components/PointForm'
+import { Link } from 'react-router-dom'
 import Error404 from 'pages/Error404'
 import _ from 'lodash'
 
@@ -31,9 +32,6 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: 10,
-  },
-  title: {
-    fontWeight: 'bold',
   },
 }))
 
@@ -64,6 +62,8 @@ const Board = (props) => {
   }
 
   const updatePoints = updated => { setPoints(updated) }
+
+  const createMarkup = htmlText => { return {__html: htmlText} }
 
   useEffect(() => {
     let isSubscribed = true
@@ -130,7 +130,7 @@ const Board = (props) => {
                 <Typography gutterBottom variant="h5" component="h1">
                   { person.name() ? person.name() : 'Anonymous' }
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
+                <Typography variant="body2" color="textSecondary">
                   { username }
                 </Typography>
               </CardContent>
@@ -165,6 +165,7 @@ const Board = (props) => {
                 hub={hub}
                 points={points}
                 isOwner={isOwner}
+                username={username}
                 userSession={userSession}
                 updatePoints={updatePoints}
               />
@@ -179,20 +180,26 @@ const Board = (props) => {
               <Typography color="textSecondary">Best View Point</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography color="textPrimary" component="div">
-                <Typography color="textPrimary" component="h1" className={classes.title}>
+              <pre>
+                <Typography component="h2" variant="h6">
                   {bestPoint.title}
                 </Typography>
-                <Typography color="textSecondary" component="p">
+                <Typography variant="caption">
+                  <Link to={`/${username}/point/${bestPoint.id}`}>
+                    {bestPoint.id}
+                  </Link>
+                </Typography>
+                <Typography color="textSecondary">
                   {bestPoint.date}
                 </Typography>
-                <Typography color="secondary" component="p">
+                <Typography color="secondary">
                   {bestPoint.editDate}
                 </Typography>
-                <Typography color="textPrimary" component="p">
-                  {bestPoint.description}
-                </Typography>
-              </Typography>
+                <br />
+                <Typography
+                  dangerouslySetInnerHTML={createMarkup(bestPoint.description)}
+                />
+              </pre>
             </AccordionDetails>
           </Accordion>
           <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
