@@ -10,7 +10,7 @@ import qr1 from 'assets/qr1.png'
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    padding: 10,
+    padding: theme.spacing(1),
   },
   paper: {
     padding: theme.spacing(2),
@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     textAlign: 'center',
+    padding: theme.spacing(1),
   },
   media: {
     paddingTop: '80%',
