@@ -131,7 +131,7 @@ class App extends Component {
       userSession.handlePendingSignIn().then((userData) => {
         window.history.replaceState({}, document.title, "/")
         this.setState({ userData: userData })
-      });
+      })
     } else if (userSession.isUserSignedIn()) {
       this.setState({ userData: userSession.loadUserData() })
     }
