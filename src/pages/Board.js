@@ -18,8 +18,8 @@ import _ from 'lodash'
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    padding: 10,
-    marginBottom: 20,
+    padding: theme.spacing(1),
+    marginBottom: theme.spacing(3),
   },
   card: {
     textAlign: 'center',
@@ -180,7 +180,7 @@ const Board = (props) => {
               <Typography color="textSecondary">Best View Point</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <pre>
+              <Typography component="div">
                 <Typography component="h2" variant="h6">
                   {bestPoint.title}
                 </Typography>
@@ -199,7 +199,7 @@ const Board = (props) => {
                 <Typography
                   dangerouslySetInnerHTML={createMarkup(bestPoint.description)}
                 />
-              </pre>
+              </Typography>
             </AccordionDetails>
           </Accordion>
           <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
