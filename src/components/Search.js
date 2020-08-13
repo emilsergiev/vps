@@ -93,7 +93,7 @@ const renderSuggestion = (suggestionProps) => {
       {...itemProps}
       key={suggestion.fullyQualifiedName}
       selected={isHighlighted}
-      component={Link} to={suggestion.fullyQualifiedName}
+      component={Link} to={'/'+suggestion.fullyQualifiedName}
       style={{ fontWeight: isSelected ? 500 : 400 }}
     >
       <ListItemIcon>
