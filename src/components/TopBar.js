@@ -74,7 +74,7 @@ const TopBar = (props) => {
           >
             <IconButton
               component={RouterLink}
-              to={ userData ? userData.username : '/' }
+              to={ userData ? '/'+userData.username : '/' }
             >
               <HomeOutline />
             </IconButton>
@@ -113,7 +113,7 @@ const TopBar = (props) => {
               <MenuItem
                 onClick={handleClose}
                 component={RouterLink}
-                to={userData.username}
+                to={'/'+userData.username}
               >
                 <HomeOutline /> &nbsp; My home page
               </MenuItem>

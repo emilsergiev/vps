@@ -28,8 +28,8 @@ const useStyles = makeStyles({
 
 const PointsTable = (props) => {
   const classes = useStyles()
-  const confirm = useConfirm()
-  const { hub, points, isOwner, userSession, updatePoints } = props
+  const confirmation = useConfirm()
+  const { hub, points, isOwner, userSession, updatePoints, username } = props
 
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -47,7 +47,7 @@ const PointsTable = (props) => {
   const handleDelete = async (pointId) => {
     const filteredPoints = _.filter(points, (point) => point.id !== pointId)
 
-    await confirm({
+    await confirmation({
       title: 'Are you sure you want to delete your view point?',
       description: 'This action is permanent!',
       confirmationButtonProps: { color: 'secondary' }
@@ -79,7 +79,12 @@ const PointsTable = (props) => {
           ).map(row => (
             <TableRow key={row.id}>
               <TableCell>
-                <PointDialog id={row.id} hub={hub} title={row.title} />
+                <PointDialog
+                  id={row.id}
+                  hub={hub}
+                  title={row.title}
+                  username={username}
+                />
               </TableCell>
               <TableCell align="right">
                 {
