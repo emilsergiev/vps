@@ -14,6 +14,12 @@ const useStyles = makeStyles(theme => ({
   title: {
     textAlign: 'center',
   },
+  text: {
+    wordWrap: "break-word",
+  },
+  edit: {
+    textAlign: 'right',
+  },
   action: {
     float: 'right',
   },
@@ -69,7 +75,9 @@ const PointDialog = (props) => {
       >
         <VisibilityOutlinedIcon fontSize="small" />
       </IconButton>
-      <Link color='textPrimary' onClick={handleClickOpen} href='#'>{title}</Link>
+      <Link color='textPrimary' onClick={handleClickOpen} href='#'>
+        {title}
+      </Link>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -83,12 +91,22 @@ const PointDialog = (props) => {
           {
             loading ?
             <CircularProgress size={68} /> :
-            <DialogContentText
-              id="scroll-dialog-description"
-              ref={descriptionElementRef}
-              dangerouslySetInnerHTML={createMarkup(point.description)}
-              tabIndex={-1}
-            />
+            <>
+              <Typography variant="caption">{point.date}</Typography>
+              <br /><br />
+              <DialogContentText
+                tabIndex={-1}
+                className={classes.text}
+                id="scroll-dialog-description"
+                ref={descriptionElementRef}
+                dangerouslySetInnerHTML={createMarkup(point.description)}
+              />
+              <Typography component="div" className={classes.edit}>
+                <Typography variant="caption">
+                  { point.editDate ? 'Last edit: ' + point.editDate : '' }
+                </Typography>
+              </Typography>
+            </>
           }
         </DialogContent>
         <DialogActions>
