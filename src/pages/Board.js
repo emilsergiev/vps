@@ -33,6 +33,13 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     margin: 10,
   },
+  bestPoint: {
+    overflow: 'hidden',
+    wordWrap: "break-word",
+  },
+  edit: {
+    textAlign: 'right',
+  },
 }))
 
 const Board = (props) => {
@@ -180,7 +187,7 @@ const Board = (props) => {
               <Typography color="textSecondary">Best View Point</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography component="div">
+              <Typography component="div" className={classes.bestPoint}>
                 <Typography component="h2" variant="h6">
                   {bestPoint.title}
                 </Typography>
@@ -192,13 +199,14 @@ const Board = (props) => {
                 <Typography color="textSecondary">
                   {bestPoint.date}
                 </Typography>
-                <Typography color="secondary">
-                  {bestPoint.editDate}
-                </Typography>
                 <br />
                 <Typography
                   dangerouslySetInnerHTML={createMarkup(bestPoint.description)}
                 />
+                <br /><br />
+                <Typography className={classes.edit}>
+                  {bestPoint.editDate ? 'Last edit: ' + bestPoint.editDate : ''}
+                </Typography>
               </Typography>
             </AccordionDetails>
           </Accordion>

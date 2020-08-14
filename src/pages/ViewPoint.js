@@ -18,10 +18,14 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
+    wordWrap: "break-word",
   },
   progress: {
     width: '100%',
   },
+  edit: {
+    textAlign: 'right',
+  }
 }))
 
 const ViewPoint = (props) => {
@@ -71,7 +75,15 @@ const ViewPoint = (props) => {
           {
             loading ?
             <LinearProgress className={classes.progress} /> :
-            <Typography dangerouslySetInnerHTML={markup(point.description)} />
+            <>
+              <Typography variant="caption" component="p">
+                {point.date}<br /><br />
+              </Typography>
+              <Typography dangerouslySetInnerHTML={markup(point.description)} />
+              <Typography component="p" variant="caption" className={classes.edit}>
+                <br />{point.editDate ? 'Last edit: ' + point.editDate : '' }
+              </Typography>
+            </>
           }
           </Paper>
         </Grid>
