@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import {
   Paper, Container, Grid, Typography, Link, IconButton
 } from '@material-ui/core'
-import { Github } from 'mdi-material-ui'
+import { Github, Twitter } from 'mdi-material-ui'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,6 +31,14 @@ const Footer = () => {
             >
               <Github color="action" />
             </IconButton>
+            <IconButton
+              component={Link}
+              href="https://twitter.com/BissiSoft"
+              target="_blank"
+              rel="noopener"
+            >
+              <Twitter color="action" />
+            </IconButton>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2" color="error" className={classes.right}>
@@ -38,7 +46,7 @@ const Footer = () => {
               <Link
                 color="textPrimary"
                 component={RouterLink}
-                to="bissisoft.id.blockstack"
+                to="/bissisoft.id.blockstack"
               >
                 BissiSoft
               </Link>

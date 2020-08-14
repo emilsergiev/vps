@@ -5,9 +5,11 @@ import {
   HomeOutline, Power, LightbulbOutline, TargetAccount, BookOpenPageVariant
 } from 'mdi-material-ui'
 import {
-  Button, Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, Link, Typography
+  Button, Drawer, List, Divider, ListItem,
+  ListItemIcon, ListItemText, Link, Typography
 } from '@material-ui/core'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import { PROFILE_URL } from 'assets/constants'
 
 const SideBar = (props) => {
@@ -17,8 +19,12 @@ const SideBar = (props) => {
   return(
     <Drawer open={open} onClose={close}>
       <List>
-        <ListItem button key="home" onClick={close}
-          component={RouterLink} to={ userData ? userData.username : '/' }
+        <ListItem
+          button
+          key="home"
+          onClick={close}
+          component={RouterLink}
+          to={ userData ? '/'+userData.username : '/' }
         >
           <ListItemIcon><HomeOutline /></ListItemIcon>
           <ListItemText primary={ userData ? 'MY HOME' : 'LANDING' } />
@@ -29,13 +35,21 @@ const SideBar = (props) => {
         userData ?
         <>
           <List>
-            <ListItem button key="out" component={Button} onClick={handleSignOut}>
+            <ListItem
+              button
+              key="out"
+              component={Button}
+              onClick={handleSignOut}
+            >
               <ListItemIcon><Power color="secondary" /></ListItemIcon>
               <ListItemText primary="Sign Out" />
             </ListItem>
           </List>
           <List>
-            <ListItem button key="edit" component={Link}
+            <ListItem
+              button
+              key="edit"
+              component={Link}
               href={PROFILE_URL}
               target="_blank"
               rel="noopener"
@@ -48,33 +62,63 @@ const SideBar = (props) => {
         </>
         :
         <List>
-          <ListItem button key="in" component={Button} onClick={() => doOpenAuth()}>
+          <ListItem
+            button
+            key="in"
+            component={Button}
+            onClick={() => doOpenAuth()}
+          >
             <ListItemIcon><Power /></ListItemIcon>
             <ListItemText primary="Sign In" />
           </ListItem>
         </List>
       }
       <List>
-        <ListItem button key="theme" component={Button} onClick={toggleTheme}>
+        <ListItem
+          button
+          key="theme"
+          component={Button}
+          onClick={toggleTheme}
+        >
           <ListItemIcon><LightbulbOutline /></ListItemIcon>
           <ListItemText primary="Theme" />
         </ListItem>
       </List>
       <Divider />
       <List>
-        <ListItem button key="about" onClick={close}
-          component={RouterLink} to="/about"
+        <ListItem
+          button
+          key="about"
+          onClick={close}
+          component={RouterLink}
+          to="/about"
         >
           <ListItemIcon><BookOpenPageVariant /></ListItemIcon>
           <ListItemText primary="About" />
         </ListItem>
       </List>
       <List>
-        <ListItem button key="test" onClick={close}
-          component={RouterLink} to="/testname.id.blockstack"
+        <ListItem
+          button
+          key="faq"
+          onClick={close}
+          component={RouterLink}
+          to="/faq"
+        >
+          <ListItemIcon><HelpOutlineIcon /></ListItemIcon>
+          <ListItemText primary="FAQ" />
+        </ListItem>
+      </List>
+      <List>
+        <ListItem
+          button
+          key="test"
+          onClick={close}
+          component={RouterLink}
+          to="/testname.id.blockstack"
         >
           <ListItemIcon><TargetAccount /></ListItemIcon>
-          <ListItemText primary="Testing..." />
+          <ListItemText primary="Test" />
         </ListItem>
       </List>
     </Drawer>

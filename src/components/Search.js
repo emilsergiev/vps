@@ -5,7 +5,7 @@ import { SEARCH_URL } from 'assets/constants'
 import avatarFallbackImage from 'assets/anon.png'
 import { Link } from 'react-router-dom'
 import { fade, makeStyles } from '@material-ui/core/styles'
-import { AccountSearchOutline } from 'mdi-material-ui'
+import { TargetAccount } from 'mdi-material-ui'
 import {
   Avatar, Typography, InputBase, Paper, MenuItem, ListItemIcon
 } from '@material-ui/core'
@@ -64,7 +64,7 @@ const renderInput = (inputProps) => {
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
-        <AccountSearchOutline />
+        <TargetAccount />
       </div>
       <InputBase
         placeholder='Search Users...'
@@ -93,7 +93,7 @@ const renderSuggestion = (suggestionProps) => {
       {...itemProps}
       key={suggestion.fullyQualifiedName}
       selected={isHighlighted}
-      component={Link} to={suggestion.fullyQualifiedName}
+      component={Link} to={'/'+suggestion.fullyQualifiedName}
       style={{ fontWeight: isSelected ? 500 : 400 }}
     >
       <ListItemIcon>
