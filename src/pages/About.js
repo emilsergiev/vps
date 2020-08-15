@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Container, Grid, Paper } from '@material-ui/core'
+import constructionGuy from 'assets/construction.gif'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,45 +23,37 @@ const About = () => {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <h1>About Page</h1>
-            <h2>Under Construction!</h2>
-            <h3>Coming soon...</h3>
+            <h2>Roadmap & Planning</h2>
+            <img src={constructionGuy} alt="boomer"/>
+            <h3>Under Construction...</h3>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>xs=12 sm=6</Paper>
+          <Paper className={classes.paper}>Smart Contracts</Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>xs=12 sm=6</Paper>
+          <Paper className={classes.paper}>Features</Paper>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Paper className={classes.paper}>Decrypt</Paper>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Paper className={classes.paper}>?</Paper>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <Paper className={classes.paper}>Encrypt</Paper>
         </Grid>
         <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
+          <Paper className={classes.paper}>Upvoting</Paper>
         </Grid>
         <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
+          <Paper className={classes.paper}>Downvoting</Paper>
         </Grid>
         <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
+          <Paper className={classes.paper}>Publish</Paper>
         </Grid>
         <Grid item xs={6} sm={3}>
-          <Paper className={classes.paper}>xs=6 sm=3</Paper>
-        </Grid>
-        <Grid item xs={2}>
-          <Paper className={classes.paper}>2</Paper>
-        </Grid>
-        <Grid item xs={2}>
-          <Paper className={classes.paper}>2</Paper>
-        </Grid>
-        <Grid item xs={2}>
-          <Paper className={classes.paper}>2</Paper>
-        </Grid>
-        <Grid item xs={2}>
-          <Paper className={classes.paper}>2</Paper>
-        </Grid>
-        <Grid item xs={2}>
-          <Paper className={classes.paper}>2</Paper>
-        </Grid>
-        <Grid item xs={2}>
-          <Paper className={classes.paper}>2</Paper>
+          <Paper className={classes.paper}>Unpublish</Paper>
         </Grid>
       </Grid>
     </Container>
