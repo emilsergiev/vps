@@ -66,9 +66,9 @@ const SideBar = (props) => {
           <List>
             <ListItem
               button
-              key="in"
+              key="register"
               component={Button}
-              onClick={() => doOpenAuth()}
+              onClick={() => { doOpenAuth(); close() }}
             >
               <ListItemIcon><CreateOutlinedIcon /></ListItemIcon>
               <ListItemText primary="Register" />
@@ -77,9 +77,9 @@ const SideBar = (props) => {
           <List>
             <ListItem
               button
-              key="in"
+              key="signin"
               component={Button}
-              onClick={() => doOpenAuth(true)}
+              onClick={() => { doOpenAuth(true); close() }}
             >
               <ListItemIcon><Power /></ListItemIcon>
               <ListItemText primary="Sign In" />

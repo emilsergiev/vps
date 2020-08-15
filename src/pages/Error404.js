@@ -20,7 +20,7 @@ const Error404 = (props) => {
   return (
     <Container maxWidth="md" className={classes.root}>
       <Grid container justify="center" alignItems="center">
-        <Paper className={classes.paper}>
+        <Paper elevation={3} className={classes.paper}>
           <h1>404 - page not found</h1>
           <Typography color="error" component="p">
             { props.msg }
