@@ -92,17 +92,20 @@ const PointDialog = (props) => {
             loading ?
             <CircularProgress size={68} /> :
             <>
-              <Typography variant="caption">{point.date}</Typography>
+              <Typography color="textSecondary" variant="caption">
+                {point.date}
+              </Typography>
               <br /><br />
               <DialogContentText
                 tabIndex={-1}
                 className={classes.text}
                 id="scroll-dialog-description"
                 ref={descriptionElementRef}
+                color="textPrimary"
                 dangerouslySetInnerHTML={createMarkup(point.description)}
               />
               <Typography component="div" className={classes.edit}>
-                <Typography variant="caption">
+                <Typography color="textSecondary" variant="caption">
                   { point.editDate ? 'Last edit: ' + point.editDate : '' }
                 </Typography>
               </Typography>

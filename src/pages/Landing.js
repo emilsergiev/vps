@@ -49,7 +49,7 @@ const Landing = () => {
           </Box>
         </Grid>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>
+          <Paper elevation={3} className={classes.paper}>
             <Typography variant="h5" component="h2" color="textPrimary">
               The View Point Site is a decentralized social networking application
               powered by blockchain technology via Blockstack <Link
@@ -66,7 +66,7 @@ const Landing = () => {
           </Typography>
         </Box>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>
+          <Paper elevation={3} className={classes.paper}>
             <Target />
             <Typography gutterBottom variant="h5" component="h4" color="textPrimary">
               Decentralized
@@ -78,7 +78,7 @@ const Landing = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>
+          <Paper elevation={3} className={classes.paper}>
             <Target />
             <Typography gutterBottom variant="h5" component="h4" color="textPrimary">
               Blockstack ID
@@ -98,7 +98,7 @@ const Landing = () => {
           </Typography>
         </Box>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>
+          <Paper elevation={3} className={classes.paper}>
             <Target />
             <Typography gutterBottom variant="h5" component="h4" color="textPrimary">
               No Censorship
@@ -110,7 +110,7 @@ const Landing = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>
+          <Paper elevation={3} className={classes.paper}>
             <Target />
             <Typography gutterBottom variant="h5" component="h4" color="textPrimary">
               No Tracking
@@ -128,7 +128,7 @@ const Landing = () => {
           </Typography>
         </Box>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>
+          <Paper elevation={3} className={classes.paper}>
             <Typography variant="h6" component="p" color="textPrimary">
               For long posts or blogs we recomend Airtext <Link color="textSecondary"
                 href="https://airtext.xyz" target="_blank" rel="noopener"
@@ -150,7 +150,7 @@ const Landing = () => {
         </Box>
       </Grid>
       <Container maxWidth="xs">
-        <Card className={classes.card}>
+        <Card elevation={3} className={classes.card}>
           <Typography variant="button" color="error" component="p" gutterBottom>
             Bitcoin gratefully accepted
           </Typography>

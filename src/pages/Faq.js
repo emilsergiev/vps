@@ -31,14 +31,18 @@ const Faq = () => {
     <Container maxWidth="md" className={classes.root}>
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <Paper className={classes.paper}>
+          <Paper elevation={3} className={classes.paper}>
             <Typography variant="h4" component="h1">
               Frequently Asked Questions
             </Typography>
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          <Accordion expanded={expanded === 'p1'} onChange={handleChange('p1')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'p1'}
+            onChange={handleChange('p1')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel1bh-content"
@@ -61,7 +65,11 @@ const Faq = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <Accordion expanded={expanded === 'p2'} onChange={handleChange('p2')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'p2'}
+            onChange={handleChange('p2')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel1bh-content"
@@ -79,7 +87,11 @@ const Faq = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <Accordion expanded={expanded === 'p3'} onChange={handleChange('p3')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'p3'}
+            onChange={handleChange('p3')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel1bh-content"
@@ -101,7 +113,11 @@ const Faq = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <Accordion expanded={expanded === 'p4'} onChange={handleChange('p4')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'p4'}
+            onChange={handleChange('p4')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel1bh-content"
@@ -123,7 +139,11 @@ const Faq = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <Accordion expanded={expanded === 'p5'} onChange={handleChange('p5')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'p5'}
+            onChange={handleChange('p5')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel1bh-content"
@@ -140,7 +160,11 @@ const Faq = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <Accordion expanded={expanded === 'p6'} onChange={handleChange('p6')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'p6'}
+            onChange={handleChange('p6')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel1bh-content"
@@ -162,7 +186,11 @@ const Faq = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <Accordion expanded={expanded === 'p7'} onChange={handleChange('p7')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'p7'}
+            onChange={handleChange('p7')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel1bh-content"
@@ -181,7 +209,11 @@ const Faq = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <Accordion expanded={expanded === 'p8'} onChange={handleChange('p8')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'p8'}
+            onChange={handleChange('p8')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel1bh-content"
@@ -204,4 +236,5 @@ const Faq = () => {
     </Container>
   )
 }
+
 export default Faq
