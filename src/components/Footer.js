@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 const Footer = () => {
   const classes = useStyles();
   return (
-    <Paper className={classes.root}>
+    <Paper elevation={3} className={classes.root}>
       <Container maxWidth="md">
         <Grid container spacing={1}>
           <Grid item xs={6}>

@@ -9,6 +9,7 @@ import {
   ListItemIcon, ListItemText, Link, Typography
 } from '@material-ui/core'
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined'
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined'
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import { PROFILE_URL } from 'assets/constants'
 
@@ -61,17 +62,30 @@ const SideBar = (props) => {
           </List>
         </>
         :
-        <List>
-          <ListItem
-            button
-            key="in"
-            component={Button}
-            onClick={() => doOpenAuth()}
-          >
-            <ListItemIcon><Power /></ListItemIcon>
-            <ListItemText primary="Sign In" />
-          </ListItem>
-        </List>
+        <>
+          <List>
+            <ListItem
+              button
+              key="register"
+              component={Button}
+              onClick={() => { doOpenAuth(); close() }}
+            >
+              <ListItemIcon><CreateOutlinedIcon /></ListItemIcon>
+              <ListItemText primary="Register" />
+            </ListItem>
+          </List>
+          <List>
+            <ListItem
+              button
+              key="signin"
+              component={Button}
+              onClick={() => { doOpenAuth(true); close() }}
+            >
+              <ListItemIcon><Power /></ListItemIcon>
+              <ListItemText primary="Sign In" />
+            </ListItem>
+          </List>
+        </>
       }
       <List>
         <ListItem

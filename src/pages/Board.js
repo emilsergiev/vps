@@ -33,6 +33,14 @@ const useStyles = makeStyles(theme => ({
   avatar: {
     margin: 10,
   },
+  bestPoint: {
+    overflow: 'hidden',
+    wordWrap: "break-word",
+  },
+  edit: {
+    textAlign: 'right',
+    fontSize: 11,
+  },
 }))
 
 const Board = (props) => {
@@ -119,7 +127,7 @@ const Board = (props) => {
     <Container maxWidth="md" className={classes.root}>
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <Card className={classes.card}>
+          <Card elevation={3} className={classes.card}>
             <CardActionArea>
               <CardMedia
                 className={classes.media}
@@ -138,7 +146,11 @@ const Board = (props) => {
           </Card>
         </Grid>
         <Grid item xs={12}>
-          <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'panel1'}
+            onChange={handleChange('panel1')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel1bh-content"
@@ -152,7 +164,11 @@ const Board = (props) => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-          <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'panel2'}
+            onChange={handleChange('panel2')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel2bh-content"
@@ -161,17 +177,23 @@ const Board = (props) => {
               <Typography color="textSecondary">View Points</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <PointsTable
-                hub={hub}
-                points={points}
-                isOwner={isOwner}
-                username={username}
-                userSession={userSession}
-                updatePoints={updatePoints}
-              />
+              { points.length ?
+                <PointsTable
+                  hub={hub}
+                  points={points}
+                  isOwner={isOwner}
+                  username={username}
+                  userSession={userSession}
+                  updatePoints={updatePoints}
+                /> : <Typography></Typography>
+              }
             </AccordionDetails>
           </Accordion>
-          <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'panel3'}
+            onChange={handleChange('panel3')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel3bh-content"
@@ -180,29 +202,35 @@ const Board = (props) => {
               <Typography color="textSecondary">Best View Point</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography component="div">
-                <Typography component="h2" variant="h6">
-                  {bestPoint.title}
+              {
+                ! _.isEmpty(bestPoint) &&
+                <Typography component="div" className={classes.bestPoint}>
+                  <Typography component="h2" variant="h6">
+                    {bestPoint.title}
+                  </Typography>
+                  <Typography variant="caption" color="textSecondary">
+                    <Link to={`/${username}/point/${bestPoint.id}`}>
+                      {bestPoint.id}
+                    </Link><br />
+                    {bestPoint.date}
+                  </Typography>
+                  <br /><br />
+                  <Typography
+                    dangerouslySetInnerHTML={createMarkup(bestPoint.description)}
+                  />
+                  <br />
+                  <Typography color="textSecondary" className={classes.edit}>
+                    {bestPoint.editDate ? 'Last edit: ' + bestPoint.editDate : ''}
+                  </Typography>
                 </Typography>
-                <Typography variant="caption">
-                  <Link to={`/${username}/point/${bestPoint.id}`}>
-                    {bestPoint.id}
-                  </Link>
-                </Typography>
-                <Typography color="textSecondary">
-                  {bestPoint.date}
-                </Typography>
-                <Typography color="secondary">
-                  {bestPoint.editDate}
-                </Typography>
-                <br />
-                <Typography
-                  dangerouslySetInnerHTML={createMarkup(bestPoint.description)}
-                />
-              </Typography>
+              }
             </AccordionDetails>
           </Accordion>
-          <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'panel4'}
+            onChange={handleChange('panel4')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel4bh-content"
@@ -239,7 +267,11 @@ const Board = (props) => {
               }
             </AccordionDetails>
           </Accordion>
-          <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
+          <Accordion
+            elevation={3}
+            expanded={expanded === 'panel5'}
+            onChange={handleChange('panel5')}
+          >
             <AccordionSummary
               expandIcon={<ChevronDown />}
               aria-controls="panel5bh-content"
